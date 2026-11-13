@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "nhs-ed-pressure"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "da22eee9-ed35-4edc-afb6-41fd142d599a"
+  }
+}

@@ -1,0 +1,25 @@
+model Model
+	culture: nb-NO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: nb-NO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DatabricksHost","DatabricksHttpPath","DatabricksCatalog","fact_ae_monthly"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_ae_monthly
+ref table DateTableTemplate_031f9176-4f55-40d4-8518-422ea604613d
+ref table LocalDateTable_825bd5ea-1526-4de7-9a50-a6142104a0ed
+ref table LocalDateTable_55531e58-3226-449f-b6e6-301e1609094c
+
+ref expression DatabricksHost
+ref expression DatabricksHttpPath
+ref expression DatabricksCatalog
+
+ref cultureInfo nb-NO

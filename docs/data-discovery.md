@@ -8,11 +8,7 @@ On 13 November 2026, we downloaded and profiled samples from three public health
 | Statistics Norway (SSB) | Three API extracts for 2023–2025 contained 15,804 rows across capacity and activity, staffing, and costs. The share of values marked `.` or `..` ranged from about 25% to 55% by extract. Beds, staffing and costs matched for 83 of 84 tested somatic organisation-year keys with a numeric bed count. | Suitable for a separate project on Norwegian hospital capacity. Preserve missing-value codes and keep national, regional and organisation totals at their own levels. |
 | Norwegian waiting times | The public FHI activity API returned 810 values. The 90 missing values were all for full-year 2026. Python also extracted 10 national rows from an FHI publication and four national deadline-breach percentages from Norwegian Directorate of Health publications. | Automated activity retrieval worked. A repeatable download of the detailed waiting-time and deadline-breach series remains unverified. The NKI export view showed 305 filtered rows, but the CSV export produced no verifiable file. |
 
-## What to verify next
-
-- Compare older NHS files with the 2026 sample and find a reporting month with both original and revised files available.
-- Verify the Type 1 four-hour denominator and the scope of admissions and admission-delay columns. Time spent in A&E and time from decision to admit measure different intervals.
-- Run one month from raw CSV through Databricks to Power BI before loading the historical series.
+The [NHS input validation](nhs-input-validation.md) covers the historical sample, original and revised files, and the metric definitions for the first Databricks-to-Power BI run.
 
 ## Sources and sample files
 
@@ -20,4 +16,4 @@ On 13 November 2026, we downloaded and profiled samples from three public health
 - SSB Statbank tables. [Capacity and activity, 13942](https://www.ssb.no/en/statbank/table/13942/) · [Staffing, 13954](https://www.ssb.no/en/statbank/table/13954/) · [Costs, 14022](https://www.ssb.no/en/statbank/table/14022/)
 - Norwegian activity and waiting-time publications. [FHI activity API, table 517](https://statistikk-data.fhi.no/api/open/v1/npr/Table/517/metadata) · [FHI waiting-time publication](https://www.fhi.no/nyheter/2026/aktivitet-og-ventetid-i-spesialisthelsetjenesten-ved-utgangen-av-august-2026/) · [Norwegian Directorate of Health NKI export](https://www.helsedirektoratet.no/statistikk/kvalitetsindikatorer/eksport-av-data-fra-de-nasjonale-kvalitetsindikatorene-nki)
 
-The original discovery script, download manifest, profiling output and raw samples are retained in a local archive.
+The NHS validation script downloads its inputs directly from the published sources.

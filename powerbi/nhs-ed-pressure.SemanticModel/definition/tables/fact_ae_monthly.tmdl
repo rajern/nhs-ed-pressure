@@ -1,0 +1,176 @@
+table fact_ae_monthly
+	lineageTag: 41fc347e-95ff-470b-825c-e6fff868c8a8
+
+	measure 'Type 1 Within 4 Hours %' =
+
+			DIVIDE(
+			    SUM(fact_ae_monthly[type_1_within_4h]),
+			    SUM(fact_ae_monthly[type_1_attendances])
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 981fdc00-f097-4911-914c-9a0d06071a4e
+
+	measure 'Type 1 Attendances' =
+			SUM(fact_ae_monthly[type_1_attendances])
+		formatString: #,0
+		lineageTag: b6cedc07-11c0-42fd-95ca-373902339295
+
+	measure 'Type 1 Over 4 Hours' =
+			SUM(fact_ae_monthly[type_1_over_4h])
+		formatString: #,0
+		lineageTag: 831ca5cc-7b82-4238-a19c-a781cb7a553a
+
+	measure 'Emergency Admissions via Type 1' =
+			SUM(fact_ae_monthly[emergency_admissions_via_type_1])
+		formatString: #,0
+		lineageTag: 006a1339-8742-4cd0-a506-beaec30834bb
+
+	measure 'Latest Reporting Month' =
+			MAX(fact_ae_monthly[reporting_month])
+		formatString: MMM yyyy
+		lineageTag: a5fd5ee1-8de3-4b6c-9db5-f2bf5bd7df0f
+
+	measure 'Latest Type 1 Attendances' =
+			VAR LatestMonth = MAX(fact_ae_monthly[reporting_month])
+			RETURN CALCULATE([Type 1 Attendances], fact_ae_monthly[reporting_month] = LatestMonth)
+		formatString: #,0
+		lineageTag: df5c4431-6dcb-43e5-8045-40f5c5c41a47
+
+	measure 'Latest Type 1 Within 4 Hours %' =
+			VAR LatestMonth = MAX(fact_ae_monthly[reporting_month])
+			RETURN CALCULATE([Type 1 Within 4 Hours %], fact_ae_monthly[reporting_month] = LatestMonth)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: e0e72da6-80ac-4cd2-9e41-183e9693073c
+
+	measure 'Latest Type 1 Over 4 Hours' =
+			VAR LatestMonth = MAX(fact_ae_monthly[reporting_month])
+			RETURN CALCULATE([Type 1 Over 4 Hours], fact_ae_monthly[reporting_month] = LatestMonth)
+		formatString: #,0
+		lineageTag: 3b6aaa0a-578b-4013-8278-8f8af0dd29c7
+
+	measure 'Latest Emergency Admissions via Type 1' =
+			VAR LatestMonth = MAX(fact_ae_monthly[reporting_month])
+			RETURN CALCULATE([Emergency Admissions via Type 1], fact_ae_monthly[reporting_month] = LatestMonth)
+		formatString: #,0
+		lineageTag: 63c4945e-ac58-4ecd-b6b5-87f052b469ae
+
+	measure 'Latest Type 1 Attendances YoY %' =
+			VAR LatestMonth = MAX(fact_ae_monthly[reporting_month])
+			VAR PriorYearMonth = EDATE(LatestMonth, -12)
+			VAR Prior = CALCULATE([Type 1 Attendances], fact_ae_monthly[reporting_month] = PriorYearMonth)
+			RETURN DIVIDE([Latest Type 1 Attendances] - Prior, Prior)
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 206596a5-4a10-4742-b942-6dcc2cae4b37
+
+	column reporting_month
+		dataType: dateTime
+		formatString: MMM yyyy
+		lineageTag: 5badb5de-0d84-408c-b42b-3a53aef8c290
+		summarizeBy: none
+		sourceColumn: reporting_month
+
+		variation Variation
+			isDefault
+			relationship: 8a8b5d1c-25fa-48df-a364-e945688a9641
+			defaultHierarchy: LocalDateTable_825bd5ea-1526-4de7-9a50-a6142104a0ed.Datohierarki
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column organisation_code
+		dataType: string
+		lineageTag: eab7110b-4df3-4781-9c80-b1083102b121
+		summarizeBy: none
+		sourceColumn: organisation_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column organisation_name
+		dataType: string
+		lineageTag: f07a2ad5-e776-4a95-9a26-8aa56a3fa177
+		summarizeBy: none
+		sourceColumn: organisation_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column parent_organisation
+		dataType: string
+		lineageTag: ce0e45db-fefc-4594-a715-c4724608d7ec
+		summarizeBy: none
+		sourceColumn: parent_organisation
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_1_attendances
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dab3bc7-7e6b-4edd-9c1a-0f3d441810ba
+		summarizeBy: sum
+		sourceColumn: type_1_attendances
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_1_over_4h
+		dataType: int64
+		formatString: 0
+		lineageTag: b8a76557-f210-4c3c-95cf-0d04db1493e2
+		summarizeBy: sum
+		sourceColumn: type_1_over_4h
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_1_within_4h
+		dataType: int64
+		formatString: 0
+		lineageTag: 31785288-e559-4458-b849-ce7d9daa06ab
+		summarizeBy: sum
+		sourceColumn: type_1_within_4h
+
+		annotation SummarizationSetBy = Automatic
+
+	column emergency_admissions_via_type_1
+		dataType: int64
+		formatString: 0
+		lineageTag: ae1b040a-989f-492d-aaaa-1cbd77b4630c
+		summarizeBy: sum
+		sourceColumn: emergency_admissions_via_type_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_release_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4170cd67-bd29-4efe-b9b9-4c26834e80db
+		summarizeBy: none
+		sourceColumn: source_release_date
+
+		variation Variation
+			isDefault
+			relationship: 585dc02d-a649-4f88-9ad9-ae68b13d68ab
+			defaultHierarchy: LocalDateTable_55531e58-3226-449f-b6e6-301e1609094c.Datohierarki
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column source_sha256
+		dataType: string
+		lineageTag: f5b58135-71cb-479a-8547-cce23736e424
+		summarizeBy: none
+		sourceColumn: source_sha256
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ae_monthly = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs(DatabricksHost, DatabricksHttpPath, [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    Catalog = Source{[Name=DatabricksCatalog,Kind="Database"]}[Data],
+				    Schema = Catalog{[Name="nhs_ed",Kind="Schema"]}[Data],
+				    Fact = Schema{[Name="fact_ae_monthly",Kind="Table"]}[Data]
+				in
+				    Fact
+
+	annotation PBI_ResultType = Table

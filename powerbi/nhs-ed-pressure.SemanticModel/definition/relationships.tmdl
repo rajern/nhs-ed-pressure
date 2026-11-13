@@ -1,0 +1,9 @@
+relationship 8a8b5d1c-25fa-48df-a364-e945688a9641
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_ae_monthly.reporting_month
+	toColumn: LocalDateTable_825bd5ea-1526-4de7-9a50-a6142104a0ed.Date
+
+relationship 585dc02d-a649-4f88-9ad9-ae68b13d68ab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_ae_monthly.source_release_date
+	toColumn: LocalDateTable_55531e58-3226-449f-b6e6-301e1609094c.Date
